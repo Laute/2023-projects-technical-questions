@@ -1,22 +1,27 @@
 import express from "express";
 
-// location is the simple (x, y) coordinates of an entity within the system
-// spaceCowboy models a cowboy in our super amazing system
-// spaceAnimal models a single animal in our amazing system
-type location = { x: number; y: number };
-type spaceCowboy = { name: string; lassoLength: number };
-type spaceAnimal = { type: "pig" | "cow" | "flying_burger" };
+type CowboyMetadata = { name: string; lassoLength: number };
+type AnimalMetadata = { type: "pig" | "cow" | "flying_burger" };
+type Location = { x: number; y: number };
 
-// spaceEntity models an entity in the super amazing (ROUND UPPER 100) system
-type spaceEntity =
-  | { type: "space_cowboy"; metadata: spaceCowboy; location: location }
-  | { type: "space_animal"; metadata: spaceAnimal; location: location };
+type SpaceCowboy = {
+  type: "space_cowboy";
+  metadata: CowboyMetadata;
+  location: Location;
+};
+type SpaceAnimal = {
+  type: "space_animal";
+  metadata: AnimalMetadata;
+  location: Location;
+};
+type SpaceEntity = SpaceCowboy | SpaceAnimal;
 
-// === ADD YOUR CODE BELOW :D ===
+let spaceEntities: SpaceEntity[] = [];
 
-// === ExpressJS setup + Server setup ===
-const spaceDatabase = [] as spaceEntity[];
+// app
+
 const app = express();
+app.use(express.json());
 
 // the POST /entity endpoint adds an entity to your global space database
 app.post("/entity", (req, res) => {
