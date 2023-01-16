@@ -2,10 +2,10 @@ import { SetStateAction, Dispatch, FormEvent } from "react";
 import { TableContents } from "../Table/Table";
 
 interface AlertModalProps {
-  useContents: Dispatch<SetStateAction<TableContents>>;
+  setContents: Dispatch<SetStateAction<TableContents>>;
 }
 
-export default function AlertModal({ useContents }: AlertModalProps) {
+export default function AlertModal({ setContents }: AlertModalProps) {
   function onSubmitEvent(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     // hint: the alert given is at (e.target as any).elements[0].value - ignore typescript being annoying

@@ -4,10 +4,6 @@ import { useState } from "react";
 import AlertModal from "../AlertModal";
 import styles from "./Table.module.css";
 
-// !!!!!!!!!!!!!!!!!!!!
-// TODO is at line 68 !
-// !!!!!!!!!!!!!!!!!!!!
-
 interface AlertUpdate {
   date: string;
   update: string;
@@ -25,7 +21,7 @@ export interface TableContents {
 }
 
 export default function Table() {
-  const [contents, useContents] = useState<TableContents>({
+  const [contents, setContents] = useState<TableContents>({
     columnTitles: ["Alert", "Status", "Updates"],
     rowContents: [
       {
@@ -48,7 +44,7 @@ export default function Table() {
       },
       {
         alert: "Done!",
-        status: "<YOUR NAME>",
+        status: "Laute",
         updates: [],
       },
     ],
@@ -56,7 +52,7 @@ export default function Table() {
 
   return (
     <>
-      <AlertModal useContents={useContents} />
+      <AlertModal setContents={setContents} />
       <div className={styles.myTable}>
         <div className={styles.row}>
           {contents.columnTitles.map((item) => (
@@ -69,7 +65,14 @@ export default function Table() {
           <div data-testid="row" className={styles.row}>
             <div className={styles.item}>{content.alert}</div>
             <div className={styles.item}>{content.status}</div>
-            <div className={styles.item}>{/* TODO: add updates */}</div>
+            <div className={styles.item}>
+              {content.updates.map((update) => (
+                <div className={styles.update}>
+                  {update.update}
+                  <div className={styles.date}>{update.date}</div>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
