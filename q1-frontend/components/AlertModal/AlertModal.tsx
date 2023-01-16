@@ -8,8 +8,17 @@ interface AlertModalProps {
 export default function AlertModal({ setContents }: AlertModalProps) {
   function onSubmitEvent(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // hint: the alert given is at (e.target as any).elements[0].value - ignore typescript being annoying
-    console.log((e.target as any)[0].value);
+    setContents((contents) => ({
+      ...contents,
+      rowContents: [
+        ...contents.rowContents,
+        {
+          alert: (e.target as any).elements[0].value,
+          status: "",
+          updates: [],
+        },
+      ],
+    }));
   }
 
   return (
