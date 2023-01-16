@@ -23,9 +23,12 @@ let spaceEntities: SpaceEntity[] = [];
 const app = express();
 app.use(express.json());
 
-// the POST /entity endpoint adds an entity to your global space database
+// adds an entity to the space database
 app.post("/entity", (req, res) => {
-  // TODO: fill me in
+  // TODO: validate input
+  const entities = req.body.entities as SpaceEntity[];
+  spaceEntities = spaceEntities.concat(entities);
+  res.status(200).json({});
 });
 
 // /lassoable returns all the space animals a space cowboy can lasso given their name
